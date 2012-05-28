@@ -9,8 +9,6 @@ import com.googlecode.gchart.client.GChart;
 public class EffektvsTidGraf extends GChart {
 	//Objects o = new Objects();
 	
-	
-
    static class DateStampedValue {
      Date date;
      double value;
@@ -78,11 +76,9 @@ public class EffektvsTidGraf extends GChart {
      getCurve().getSymbol().setFillSpacing(10);
      getCurve().getSymbol().setFillThickness(3);
 
-
      for (int i = 0; i < persX1.length; i++){
        getCurve().addPoint(persX1[i].date.getTime(), persX1[i].value);
      }
-
    }
     
     @Override
