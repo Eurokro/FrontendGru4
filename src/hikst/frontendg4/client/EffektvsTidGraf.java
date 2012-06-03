@@ -117,8 +117,6 @@ public class EffektvsTidGraf extends GChart {
 		persX1[0].value = 60;
 	}
 
-//	public void setObjects(Objects o){
-//    	this.o = o;
-//    }
+
    
 }

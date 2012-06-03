@@ -85,7 +85,7 @@ public class Graph extends GChart
 	    getCurve().setLegendLabel("<i>"+legendLabel+"</i>");
 	    getCurve().getSymbol().setBorderColor(color);
 	    getCurve().getSymbol().setBackgroundColor(color);
-		getCurve().getSymbol().setFillSpacing(10);
+		getCurve().getSymbol().setFillSpacing(0);
 	    getCurve().getSymbol().setFillThickness(3);
 	    
 	    for (int i = 0; i < x.length; i++){

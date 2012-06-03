@@ -1,6 +1,5 @@
 package hikst.frontendg4.client;
 
-import hikst.frontendg4.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootLayoutPanel;

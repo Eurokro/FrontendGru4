@@ -5,12 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class Description implements Serializable
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6397120006771778860L;
 	long minimumTime;
 	long maximumTime;
 	SimulatorObject simulatorObject;

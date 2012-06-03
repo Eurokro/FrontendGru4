@@ -1,12 +1,10 @@
 package hikst.frontendg4.client;
 
 import hikst.frontendg4.shared.Description;
-import hikst.frontendg4.shared.Plot;
+import hikst.frontendg4.shared.SimulationRequest;
+import hikst.frontendg4.shared.SimulationTicket;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.tools.ant.taskdefs.Exit;
+import java.util.Date;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -24,6 +22,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.user.client.ui.TextArea;
  
 public class MyDockLayoutPanel extends Composite {
 
@@ -36,16 +36,14 @@ public class MyDockLayoutPanel extends Composite {
   Simulation simulation;
 
 	//interface MyUiBinder extends UiBinder<Widget, MyDockLayoutPanel>{}
-	Objects o; 
-	ArrayList<Objects> houses = new ArrayList<Objects>();
-    EffektvsTidGraf g;
+	SimulationManagementObject simManager = new SimulationManagementObject(this);
+    Graph g;
 	private static MyDockLayoutPanelUiBinder uiBinder = GWT
     .create(MyDockLayoutPanelUiBinder.class);
     
     @UiField Button Test1;
     @UiField FlowPanel centerPanel;
-    @UiField TextBox housesize;
-    @UiField TextBox nrpersons;
+    @UiField TextBox nameField;
     @UiField TextBox user;
     @UiField TextBox pass;
     @UiField Button login;
@@ -54,85 +52,68 @@ public class MyDockLayoutPanel extends Composite {
     @UiField Tree tree;
     @UiField Button remHouses;
     @UiField Button databaseCall;
-    int nrpersons2 = 1;
-    int housesize2 = 1;
+    @UiField TextBox wattField;
+    @UiField TextBox voltField;
+    @UiField TextBox intervalField;
+    @UiField DateBox fromDateField;
+    @UiField DateBox toDateField;
+    @UiField TextArea statusField;
     int yAxis = 1200;
-	private int houseCounter = 0;
-    
+    long interval;
+	private int objectCounter = 0;
+    private DatabaseServiceAsync databaseService = GWT.create(DatabaseService.class);
+    Date toDate,fromDate;
+    public SimulationTicket ticket;
+    public boolean objectAdded = false;
+    public boolean simulationStarted = false;
+    public boolean simulationFinished = false;
+   
     
     public MyDockLayoutPanel(){
     	initWidget(uiBinder.createAndBindUi(this));    	
     	aa.setText("Du m\u00E5 logge inn");
-    	//housesize.setText("");
-    	//nrpersons.setText("");	
     }
 
-    @UiHandler("housesize")
+    @UiHandler("nameField")
     void onClick(ClickEvent event){
-    	housesize.setText("");
-    }
-    
-    @UiHandler("nrpersons")
-    void onClick3(ClickEvent event){
-    	nrpersons.setText("");
+    	nameField.setText("");
     }
     
     @UiHandler("update")
     void onClick4(ClickEvent e){
-    	o = new Objects();
+    	
+    	this.statusField.setText("Trying to save object to database...");
+    	
     	updated = true;
-    	String s = nrpersons.getText();
-    	String ss = housesize.getText();
-    	nrpersons2 = Integer.parseInt(s);
-    	housesize2 = Integer.parseInt(ss);
-    	// aa.setText(s + " " + ss);
+    	String wattS = wattField.getText();
+    	String name = nameField.getText();
+    	String voltS = voltField.getText();
+    	String intervalString = intervalField.getText();
+    	toDate = toDateField.getValue();
+    	fromDate = fromDateField.getValue();
     	
-    	if (nrpersons2 <= 3){
-    		nrpersons2 = 1;
-    	}
+    	interval = Long.parseLong(intervalString);
+    	double watt = Integer.parseInt(wattS);
+    	double volt = Integer.parseInt(voltS);
     	
-    	if (nrpersons2 >=4 && nrpersons2 <= 6){
-    		nrpersons2 = 2;
-    	}
-    	
-    	if (nrpersons2 > 7){
-    		nrpersons2 = 3;
-    		yAxis = 3000;
-    	}
-    	if (nrpersons2 > 9 || housesize2 > 250){
-    		Window.alert("For stort hus, eller for mange beboere.");
-    		return;
-    	}
-    	
-    	
-    	if (housesize2 <= 80){
-    		housesize2 = 1;
-    	}
-    	
-    	if (housesize2 >=81 && housesize2 <= 150){
-    		housesize2 = 2;
-    	}
-    	
-    	if (housesize2 > 151){
-    		housesize2 = 3;
-    	}
-    	o.setHouseSize(nrpersons2);
-    	o.setnrPersons(housesize2);
-    	o.setYAxis(yAxis);
-    	houses.add(o);
-    	
-    	CheckBox cb = new CheckBox("House "+(houseCounter = houseCounter + 1));
+    	simManager.setEffect(watt);
+    	simManager.setVoltage(volt);
+    	simManager.setName(name);
+    	simManager.save(this);
+    	    	
+    	CheckBox cb = new CheckBox("Object "+(objectCounter = objectCounter + 1)+" - "+name);
     	cb.setValue(true);
-    	TreeItem house = new TreeItem(cb);
+    	TreeItem object = new TreeItem(cb);
     	TreeItem info = new TreeItem("Info");
-    	info.addItem("Areal: "+Integer.parseInt(ss));
-    	house.addItem(info);
-    	TreeItem people = new TreeItem("Occupants:");
-    	for(int i = 0; i < Integer.parseInt(s);i++){
-    		people.addItem("Person "+i);
-    	}
-    	house.addItem(people);
-    	tree.addItem(house);
+    	info.addItem("To date: "+toDate);
+    	info.addItem("fom date: "+fromDate);
+    	info.addItem("interval: "+ interval);
+    	object.addItem(info);
+    	TreeItem electricCrap = new TreeItem("Electric crap:");
+    	electricCrap.addItem("Watt: "+ watt);
+    	electricCrap.addItem("Volt: "+ volt);
+    	tree.addItem(electricCrap);
+    	tree.addItem(object);
     	initWidget(tree);
     	
     }
@@ -148,10 +129,31 @@ public class MyDockLayoutPanel extends Composite {
 		//centerPanel.clear();
 		if (loggedin ==  true){
 			if(updated == true){
-				g = new EffektvsTidGraf(houses);
-			centerPanel.clear();
-			centerPanel.add(g);
-		    g.update();
+			
+			if(this.objectAdded)
+			{	
+				ticket = new SimulationTicket(-1,false,0);
+				databaseService.requestSimulation(
+						new SimulationRequest(
+								simManager.getId(),
+								interval,
+								fromDate.getTime(),
+								toDate.getTime()
+								),
+								new SimulationRequestCallback(this));
+			
+				simulationStarted = true;
+				
+				this.statusField.setText("Simulation request has been sent");
+			}
+			else
+			{
+				Window.alert("Vent til objektet er lagt inn i databasen");
+			}
+				//g = new Graph();
+			//centerPanel.clear();
+			//centerPanel.add(g);
+		    //g.update();
 			}
 			else {
 				 Window.alert("Du m\u00E5 legge til hus før du kan simulere");
@@ -192,10 +194,32 @@ public class MyDockLayoutPanel extends Composite {
 	}
 	@UiHandler("remHouses")
 	void onRemHousesClick(ClickEvent event) {
-		houses.clear();
-		tree.clear();
-		updated = false;
+		//simManager.clear();
+		//tree.clear();
+		//updated = false;
+		if(ticket == null)
+		{
+			this.statusField.setText("The simulation ticket is null..");
+			return;
+		}
+		
+		if(this.simulationStarted)
+		{
+			this.statusField.setText("Checking simulation status...");
+			databaseService.getSimulationStatus(ticket,new GetStatusCallback(this));
+		}
+		else
+		{
+			this.statusField.setText("Simulation has not started yet");
+		}
+		
 	}
+	
+	public void updateStatus(String status)
+	{
+		this.statusField.setText("Status: "+status);
+	}
+	
 	public void setData(Description description)
     {
     	simulation = new Simulation(description);
@@ -203,15 +227,28 @@ public class MyDockLayoutPanel extends Composite {
     	Graph powerGraph = simulation.getEffectGraph();
 		centerPanel.add(powerGraph);
 		powerGraph.update();
+		this.objectAdded = false;
+		this.simulationStarted = false;
     }
-	private DatabaseServiceAsync databaseService = GWT.create(DatabaseService.class);
+	
+	public void setSimulationTicket(SimulationTicket ticket)
+	{
+		this.ticket = ticket;
+	}
 	
 	MyDockLayoutPanel panel;
 	@UiHandler("databaseCall")
 	void onDatabaseCallClick(ClickEvent event) {
-		RootLayoutPanel.get().add(new MyDockLayoutPanel());
-		panel = new MyDockLayoutPanel();
-		RootLayoutPanel.get().add(panel);
-		databaseService.getSimulations(new ListDescriptionsCallback(panel));
+		
+		if(this.simulationFinished)
+		{
+		System.out.println("Henter ut simuleringsdata fra database...");
+		this.statusField.setText("Retrieving simulation data from database..");
+		databaseService.getSimulation(ticket.getDescriptionID(), new DescriptionsCallback(this));
+		}
+		else
+		{
+			this.statusField.setText("Simulation not finished...");
+		}
 	}
 }

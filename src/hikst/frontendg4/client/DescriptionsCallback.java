@@ -2,8 +2,6 @@ package hikst.frontendg4.client;
 
 import hikst.frontendg4.shared.Description;
 
-import java.util.List;
-
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -20,7 +18,6 @@ public class DescriptionsCallback implements AsyncCallback<Description>
 	public void onFailure(Throwable caught) {
 		
 		Window.alert(caught.getMessage());
-		
 	}
 
 	@Override

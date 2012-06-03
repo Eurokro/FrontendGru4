@@ -65,4 +65,3 @@ public class Simulation
 		powerConsumptionGraph = new Graph(times,power_consumptions,simulatorObject,KILOWATT_PER_HOUR_Y_LABEL,KILOWATT_PER_HOUR,WATT_PER_HOUR_COLOR);
 	}
 }
-

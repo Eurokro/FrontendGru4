@@ -3,10 +3,9 @@ package hikst.frontendg4.shared;
 import java.io.Serializable;
 import java.util.Date;
 
+@SuppressWarnings("serial")
 public class Plot implements Serializable
 {
-	private static final long serialVersionUID = 1L;
-	
 	private Date date;
 	private float effect;
 	private float power_consumption;
