@@ -22,8 +22,8 @@
        <g:north size='3.6'>
          <g:FlowPanel styleName="{style.northPanel}">
          	<g:Label text="Velkommen til Hikst Simulator" horizontalAlignment="ALIGN_CENTER"/>
-         	<g:Button width="132px" height="27px" text="Graf" ui:field="Test1">TEST</g:Button>
-         	<g:Button ui:field="databaseCall" height="27px">Call Database</g:Button>
+         	<g:Button width="132px" height="27px" text="Legg til simulering" ui:field="Test1">TEST</g:Button>
+         	<g:Button ui:field="databaseCall" height="27px">Tegn graf</g:Button>
          </g:FlowPanel>
        </g:north>
        <g:west size='16.1'>
@@ -31,7 +31,7 @@
          	<g:TextBox text="Navn" width="172px" ui:field="user" name="user"/>
            <g:TextBox text="Passord" width="172px" ui:field="pass" name="pass"/>
            <g:Button ui:field="login">Logg Inn</g:Button>
-           <g:Button ui:field="update" text="Legg til hus">Oppdatere innput</g:Button>
+           <g:Button ui:field="update" text="Legg til objekt">Oppdatere innput</g:Button>
            <g:TextBox text="Object name" ui:field="nameField" name="housesize"/>
            <g:TextBox ui:field="wattField" text="Watt"/>
            <g:TextBox ui:field="voltField" name="Volt" text="Volt"/>
@@ -43,7 +43,7 @@
            <g:Label text="New Label" ui:field="aa" width="160px"/>
            <g:Tree ui:field="tree" animationEnabled="true">
            </g:Tree>
-           <g:Button text="Fjern alle hus" ui:field="remHouses">Fjern hus</g:Button>
+           <g:Button text="Sjekk status" ui:field="remHouses">Fjern hus</g:Button>
          </g:FlowPanel>
        </g:west>
        <g:center>
