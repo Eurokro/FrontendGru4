@@ -18,15 +18,19 @@ public class FrontendGru4 implements EntryPoint {
 	private DatabaseServiceAsync databaseService = GWT.create(DatabaseService.class);
 	private String message = "";
 	MyDockLayoutPanel panel;
+	Login panel2;
+	
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
 		
-		 RootLayoutPanel.get().add(new MyDockLayoutPanel());
-		 panel = new MyDockLayoutPanel();
+		// RootLayoutPanel.get().add(new MyDockLayoutPanel());
+		// panel = new MyDockLayoutPanel();
 			//makeCall();
-			RootLayoutPanel.get().add(panel);
+		RootLayoutPanel.get().add(new Login());
+		panel2 = new Login();
+			RootLayoutPanel.get().add(panel2);
 	}
 	private void makeCall()
 	{	

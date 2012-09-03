@@ -11,8 +11,7 @@ public class ListDescriptionsCallback implements AsyncCallback<List<Description>
 
 	MyDockLayoutPanel panel;
 	
-	ListDescriptionsCallback(MyDockLayoutPanel panel)
-	{
+	ListDescriptionsCallback(MyDockLayoutPanel panel){
 		this.panel = panel;
 	}
 	
@@ -24,14 +23,20 @@ public class ListDescriptionsCallback implements AsyncCallback<List<Description>
 	}
 
 	@Override
-	public void onSuccess(List<Description> result) {
+	public void onSuccess(List<Description> result){
 		
 		//TODO:
 		//add all the finished simulations....
 		
 		if(result.size() > 0)
 		{
-			panel.setData(result.get(0));
+			try{
+				panel.setData(result.get(0));
+			}
+			catch(Exception e){
+				
+			}
+			
 		}
 		else
 		{

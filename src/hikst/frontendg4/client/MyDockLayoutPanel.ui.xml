@@ -19,7 +19,7 @@
         }
     </ui:style>
      <g:DockLayoutPanel unit='EM' height="600">
-       <g:north size='3.6'>
+       <g:north size='3.0'>
          <g:FlowPanel styleName="{style.northPanel}">
          	<g:Label text="Velkommen til Hikst Simulator" horizontalAlignment="ALIGN_CENTER"/>
          	<g:Button width="132px" height="27px" text="Legg til simulering" ui:field="Test1">TEST</g:Button>

@@ -35,6 +35,7 @@ public class MyDockLayoutPanel extends Composite {
   private String userpass = "Passord";
   Simulation simulation;
 
+  
 	//interface MyUiBinder extends UiBinder<Widget, MyDockLayoutPanel>{}
 	SimulationManagementObject simManager = new SimulationManagementObject(this);
     Graph g;
@@ -70,13 +71,25 @@ public class MyDockLayoutPanel extends Composite {
    
     
     public MyDockLayoutPanel(){
-    	initWidget(uiBinder.createAndBindUi(this));    	
+    	initWidget(uiBinder.createAndBindUi(this)); 
     	aa.setText("Du m\u00E5 logge inn");
     }
 
     @UiHandler("nameField")
     void onClick(ClickEvent event){
-    	nameField.setText("");
+    	nameField.setText("DemoObject");
+    }
+    @UiHandler("wattField")
+    void onClickwattField(ClickEvent event){
+    	wattField.setText("40");
+    }
+    @UiHandler("voltField")
+    void onClickvoltField(ClickEvent event){
+    	voltField.setText("230");
+    }
+    @UiHandler("intervalField")
+    void onClickintervalField(ClickEvent event){
+    	intervalField.setText("86400000");
     }
     
     @UiHandler("update")
