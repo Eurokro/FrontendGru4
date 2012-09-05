@@ -41,8 +41,7 @@
            <g:Label text="To date:"/>
            <p1:DateBox ui:field="toDateField"/>
            <g:Label text="New Label" ui:field="aa" width="160px"/>
-           <g:Tree ui:field="tree" animationEnabled="true">
-           </g:Tree>
+           <g:Tree ui:field="tree" animationEnabled="true"></g:Tree>
            <g:Button text="Sjekk status" ui:field="remHouses">Fjern hus</g:Button>
          </g:FlowPanel>
        </g:west>

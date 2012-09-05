@@ -1,5 +1,9 @@
 package hikst.frontendg4.client;
 
+import hikst.frontendg4.shared.Description;
+import hikst.frontendg4.shared.SimulationRequest;
+import hikst.frontendg4.shared.SimulationTicket;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -17,6 +21,8 @@ public class NewObject extends Composite implements HasText {
 
 	ObjectMenu panel;
 	
+	//SimulationManagementObject simManager = new SimulationManagementObject(this);
+	
 	private static NewObjectUiBinder uiBinder = GWT
 			.create(NewObjectUiBinder.class);
 	@UiField TextBox impactFactor;
@@ -28,6 +34,15 @@ public class NewObject extends Composite implements HasText {
 	@UiField TextBox usagePattern;
 	@UiField Button back;
 	@UiField Button addObject;
+	@UiField Button saveObject;
+	
+	String impactFactor_ = impactFactor.getText();
+	String effect_ = effect.getText();
+	String volt_ = volt.getText();
+	String name_ = name.getText();
+	String longtitude_ = longtitude.getText();
+	String latitude_ = latitude.getText();
+	String usagePattern_ = usagePattern.getText();
 	
 	@UiHandler("impactFactor")
 	void onUserClickimpactFactor(ClickEvent event) {
@@ -83,4 +98,12 @@ public class NewObject extends Composite implements HasText {
 		panel = new ObjectMenu();
 		RootLayoutPanel.get().add(panel);
 	}
+	
+	@UiHandler("saveObject")
+	void onSaveObject(ClickEvent event){
+		//TODO lagre objekt i database...
+	}
+
+	
+	
 }

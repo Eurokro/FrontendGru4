@@ -10,7 +10,12 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.user.client.ui.IntegerBox;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Tree;
 
 public class ObjectMenu extends Composite implements HasText {
 
@@ -19,6 +24,9 @@ public class ObjectMenu extends Composite implements HasText {
 	private static ObjectMenuUiBinder uiBinder = GWT
 			.create(ObjectMenuUiBinder.class);
 	@UiField Button back;
+	@UiField DateBox fromDate;
+	@UiField DateBox toDate;
+	@UiField Tree ObjectMainTree;
 
 	interface ObjectMenuUiBinder extends UiBinder<Widget, ObjectMenu> {
 	}
@@ -26,6 +34,8 @@ public class ObjectMenu extends Composite implements HasText {
 	public ObjectMenu() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
+	
+	
 
 	@UiHandler("button_1")
 	void onButton_1Click(ClickEvent event) {
