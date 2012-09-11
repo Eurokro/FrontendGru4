@@ -1,0 +1,2 @@
+serviceClass: hikst.frontendg4.client.DatabaseService
+path: 88DC1F13A6B24121D6026C8C819B1A19.gwt.rpc

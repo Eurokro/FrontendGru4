@@ -11,35 +11,45 @@ import java.util.Scanner;
 import java.util.Properties;
 
 public class Settings {
-	private static Properties configFile;
-	private static File file;
+	private static Properties configFile = new Properties();;
+	private final static String FILENAME = "frontend.properties";
+	private static File file = new File(FILENAME);;
 	private static String db_hostname, db_port, db_db, db_user, db_pw;
 	private static Connection dbc;
 	
 	
-	public Settings(){
-		this("Simulator.properties");
+	public Settings() throws SettingsDotPrefNotFoundException {
+		if (loadable()){
+			load();
+		} else {
+			throw new SettingsDotPrefNotFoundException();
+		}
 	}
 	
-	public Settings(String $filename){
-		configFile = new Properties();
-		file = new File($filename);
-		load();
-	}
-	
-	private void writeDefaultConfig(){
-		configFile.setProperty("DB_HOSTNAME", "");
-		configFile.setProperty("DB_PORT", "");
-		configFile.setProperty("DB_DB", "");
-		configFile.setProperty("DB_USER", "");
-		configFile.setProperty("DB_PW", "");
+	public static boolean writeConfig(String hostname, String port, String db, String user, String password){
+		configFile.setProperty("DB_HOSTNAME", hostname);
+		configFile.setProperty("DB_PORT", port);
+		configFile.setProperty("DB_DB", db);
+		configFile.setProperty("DB_USER", user);
+		configFile.setProperty("DB_PW", password);
 		
 		try {
 			configFile.store(new FileWriter(file),null);
+			return true;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return false;
 		
+	}
+	
+	public static boolean loadable(){
+		try {
+			new FileReader(file);
+			return true;
+		} catch (IOException e) {
+			return false;
+		}
 	}
 	
 	private void load(){
@@ -52,18 +62,7 @@ public class Settings {
 			db_user = configFile.getProperty("DB_USER");
 			db_pw = configFile.getProperty("DB_PW");
 		} catch (IOException e) {
-			// TODO: ¯nsker vi Œ kreve brukerinput i denne klassen?
-			System.err.println("Unable to open " + file.getAbsolutePath() + ".\nCreate default config at this location? [y/n]");
-			Scanner scan = new Scanner(System.in);
-			if(scan.nextLine().equalsIgnoreCase("y")){
-				writeDefaultConfig();
-			}
-			System.err.println("Retry loading config? [y/n]");
-			if(scan.nextLine().equalsIgnoreCase("y")){
-				load();
-			} else {
-				System.exit(0);
-			}
+			e.printStackTrace();
 		}
 	}
 	
@@ -95,28 +94,5 @@ public class Settings {
 			e.printStackTrace();
 		}
 		return false;
-	}
-	
-	/*
-	 * SimulatorID is the ID given to the simulator instance by the database
-	 * The setter will only be used by the AliveMessenger after the first reporting.
-	 */
-	public static int getSimulatorID(){
-		int result;
-		try {
-			result = Integer.parseInt(configFile.getProperty("SIMULATOR_ID"));
-		} catch (NumberFormatException ex) {
-            return -1;
-        }
-		return result;
-	}
-	
-	public static void setSimulatorID(int id){
-		configFile.setProperty("SIMULATOR_ID", Integer.toString(id));
-		try {
-			configFile.store(new FileWriter(file),null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

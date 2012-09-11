@@ -19,18 +19,25 @@ public class FrontendGru4 implements EntryPoint {
 	private String message = "";
 	MyDockLayoutPanel panel;
 	Login panel2;
+	Setup panelSetup;
 	
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
 		
+		if (Settings.loadable()){
 		// RootLayoutPanel.get().add(new MyDockLayoutPanel());
 		// panel = new MyDockLayoutPanel();
 			//makeCall();
-		RootLayoutPanel.get().add(new Login());
-		panel2 = new Login();
+			RootLayoutPanel.get().add(new Login());
+			panel2 = new Login();
 			RootLayoutPanel.get().add(panel2);
+		} else {
+			RootLayoutPanel.get().add(new Setup());
+			panelSetup = new Setup();
+			RootLayoutPanel.get().add(panelSetup);
+		}
 	}
 	private void makeCall()
 	{	
