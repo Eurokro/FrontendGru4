@@ -40,7 +40,6 @@ public class Login extends Composite implements HasText {
 	void onClick1(ClickEvent event){
 		user.setText("");
 	}
-	
 
 	public Login(String firstName) {
 		initWidget(uiBinder.createAndBindUi(this));

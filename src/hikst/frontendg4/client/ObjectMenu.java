@@ -24,6 +24,7 @@ public class ObjectMenu extends Composite implements HasText {
 	private static ObjectMenuUiBinder uiBinder = GWT
 			.create(ObjectMenuUiBinder.class);
 	@UiField Button back;
+	@UiField Button addObject;
 	@UiField DateBox fromDate;
 	@UiField DateBox toDate;
 	@UiField Tree ObjectMainTree;
@@ -37,8 +38,8 @@ public class ObjectMenu extends Composite implements HasText {
 	
 	
 
-	@UiHandler("button_1")
-	void onButton_1Click(ClickEvent event) {
+	@UiHandler("addObject")
+	void onAddObjectClick(ClickEvent event) {
 		RootLayoutPanel.get().add(new NewObject());
 		panel = new NewObject();
 		RootLayoutPanel.get().add(panel);

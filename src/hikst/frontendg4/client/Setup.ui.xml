@@ -23,7 +23,7 @@
          <g:FlowPanel styleName="{style.northPanel}">
          </g:FlowPanel>
        </g:north>
-       <g:west size='7.2'>
+       <g:west size='9.2'>
          <g:FlowPanel styleName="{style.westPanel}"/>
        </g:west>
        <g:center>
@@ -42,7 +42,7 @@
          	<g:Button ui:field="install">Install</g:Button>
          </g:FlowPanel>
        </g:center>
-       <g:east size='7.2'>
+       <g:east size='9.3'>
          <g:FlowPanel styleName="{style.eastPanel}">
          </g:FlowPanel>
        </g:east>     

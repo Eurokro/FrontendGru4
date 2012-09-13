@@ -40,8 +40,6 @@ public class GetStatusCallback implements AsyncCallback<Integer>
 		{
 			panel.updateStatus("Invalid simulation status detected... : "+result);
 		}
-		
 	}
-
 }
 

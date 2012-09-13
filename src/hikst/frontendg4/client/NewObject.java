@@ -36,42 +36,7 @@ public class NewObject extends Composite implements HasText {
 	@UiField Button addObject;
 	@UiField Button saveObject;
 	
-	String impactFactor_ = impactFactor.getText();
-	String effect_ = effect.getText();
-	String volt_ = volt.getText();
-	String name_ = name.getText();
-	String longtitude_ = longtitude.getText();
-	String latitude_ = latitude.getText();
-	String usagePattern_ = usagePattern.getText();
 	
-	@UiHandler("impactFactor")
-	void onUserClickimpactFactor(ClickEvent event) {
-		impactFactor.setText("");
-	}
-	@UiHandler("effect")
-	void onUserClickeffect(ClickEvent event) {
-		effect.setText("");
-	}
-	@UiHandler("volt")
-	void onUserClickvolt(ClickEvent event) {
-		volt.setText("");
-	}
-	@UiHandler("name")
-	void onUserClickname(ClickEvent event) {
-		name.setText("");
-	}
-	@UiHandler("longtitude")
-	void onUserClicklongtitude(ClickEvent event) {
-		longtitude.setText("");
-	}
-	@UiHandler("latitude")
-	void onUserClicklatitude(ClickEvent event) {
-		latitude.setText("");
-	}
-	@UiHandler("usagePattern")
-	void onUserClickusagePattern(ClickEvent event) {
-		usagePattern.setText("");
-	}
 
 	interface NewObjectUiBinder extends UiBinder<Widget, NewObject> {
 	}

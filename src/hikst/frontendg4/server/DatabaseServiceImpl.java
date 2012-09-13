@@ -39,7 +39,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 	@Override
 	public List<Plot> getData(int sim_description_id) throws IllegalArgumentException {
 		
-		Connection connection = DB.getDBC();
+		Connection connection = DB_REMOVE_ASAP111111.getDBC();
 		List<Plot> plots = new ArrayList<Plot>();
 		
 		try
@@ -72,7 +72,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 	@Override
 	public SimulatorObject getSimulatorObject(int simulation_object_id)throws IllegalArgumentException
 	{
-		Connection connection = DB.getDBC();
+		Connection connection = DB_REMOVE_ASAP111111.getDBC();
 		
 		try
 		{		
@@ -107,7 +107,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 		
 		List<Integer> simulation_descriptions = new ArrayList<Integer>();
 		
-		Connection connection = DB.getDBC();
+		Connection connection = DB_REMOVE_ASAP111111.getDBC();
 		
 		try
 		{
@@ -137,7 +137,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 	{
 		try
 		{
-			Connection connection = DB.getDBC();
+			Connection connection = DB_REMOVE_ASAP111111.getDBC();
 			
 			String query = "SELECT Object_ID, minimumTime, maximumTime FROM Simulation_Descriptions WHERE ID=?";
 			PreparedStatement statement = connection.prepareStatement(query);
@@ -190,7 +190,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 		String username = request.getUsername();
 		String password = request.getPassword();
 		
-		Connection connection = DB.getDBC();
+		Connection connection = DB_REMOVE_ASAP111111.getDBC();
 		
 		try
 		{
@@ -289,7 +289,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 	@Override
 	public boolean register(RegisterRequest request) 
 	{	
-		Connection connection = DB.getDBC();
+		Connection connection = DB_REMOVE_ASAP111111.getDBC();
 		
 		try
 		{
@@ -331,7 +331,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 	@Override
 	public boolean exists(String username) {
 	
-		Connection connection = DB.getDBC();
+		Connection connection = DB_REMOVE_ASAP111111.getDBC();
 		
 		try
 		{
@@ -356,7 +356,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 		
 		try
 		{
-			Connection connection = DB.getDBC();
+			Connection connection = DB_REMOVE_ASAP111111.getDBC();
 			
 			String query = "INSERT INTO Impact_Degrees(Percent, Type_ID) VALUES(?,?);";
 			PreparedStatement statement = connection.prepareStatement(query);
@@ -376,7 +376,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 	@Override
 	public int saveObject(SimulatorObject simulatorObject) {
 		
-		Connection connection = DB.getDBC();
+		Connection connection = DB_REMOVE_ASAP111111.getDBC();
 		int object_id = 0;
 		try
 		{
@@ -452,7 +452,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 	@Override
 	public boolean updateObject(int id,SimulatorObject object) {
 		
-		Connection connection = DB.getDBC();
+		Connection connection = DB_REMOVE_ASAP111111.getDBC();
 		
 		try
 		{
@@ -492,7 +492,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 	
 		try
 		{
-			Connection connection = DB.getDBC();
+			Connection connection = DB_REMOVE_ASAP111111.getDBC();
 			
 			String query = "DELETE FROM Part_Objects WHERE Father_ID=?";
 			PreparedStatement statement = connection.prepareStatement(query);
@@ -522,7 +522,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 		
 		try
 		{
-			Connection connection = DB.getDBC();
+			Connection connection = DB_REMOVE_ASAP111111.getDBC();
 			
 			String query = "INSERT INTO Simulation_Descriptions(Object_ID, timeIntervall,minimumTime,maximumTime) VALUES(?,?,?,?) RETURNING ID";
 			PreparedStatement statement = connection.prepareStatement(query);
@@ -575,7 +575,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 		
 		try
 		{
-			Connection connection = DB.getDBC();
+			Connection connection = DB_REMOVE_ASAP111111.getDBC();
 			
 			String query = "DELETE FROM Simulations WHERE Sim_Description_ID=?";
 			PreparedStatement statement = connection.prepareStatement(query);
@@ -601,7 +601,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 		
 		try
 		{
-			Connection connection = DB.getDBC();
+			Connection connection = DB_REMOVE_ASAP111111.getDBC();
 			
 			int access_level_id = AccessLevel.getInstance().getID(access_level);
 			
@@ -629,7 +629,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements Databas
 		
 		try
 		{
-			Connection connection = DB.getDBC();
+			Connection connection = DB_REMOVE_ASAP111111.getDBC();
 			
 			int queueID = ticket.getQueueID();
 			System.out.println("Ticket queue id: "+ticket.getQueueID());

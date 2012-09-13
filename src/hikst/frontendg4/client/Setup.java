@@ -19,7 +19,7 @@ public class Setup extends Composite implements HasText {
 
 	interface SetupUiBinder extends UiBinder<Widget, Setup> {
 	}
-
+	
 	public Setup() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
@@ -39,21 +39,18 @@ public class Setup extends Composite implements HasText {
 		}
 		else{
 			Window.alert("Dette var en stor katastrofe! kontakt support snarest");
-		}
-		
+		}	
 	}
-	
 
 	@Override
 	public String getText() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public void setText(String text) {
 		// TODO Auto-generated method stub
-		
 	}
 
 

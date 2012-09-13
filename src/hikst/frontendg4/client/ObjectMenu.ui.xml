@@ -28,7 +28,7 @@
        </g:north>
        <g:west size='10.8'>
          <g:FlowPanel styleName="{style.westPanel}">
-         	<g:Button ui:field="button_1" width="140px">Legg Til Objekt</g:Button>
+         	<g:Button ui:field="addObject" width="140px">Legg Til Objekt</g:Button>
          	<g:Label text="From Date"/>
          	<p1:DateBox ui:field="fromDate"/>
          	<g:Label text="To Date"/>
