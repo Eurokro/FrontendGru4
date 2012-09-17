@@ -35,12 +35,10 @@
          	<p1:DateBox ui:field="toDate"/>
          	<g:Button width="140px" ui:field="back">Tilbake</g:Button>
          	<g:TextBox text="Intervall" ui:field="intervall"/>
-         	<g:Tree ui:field="ObjectMainTree" animationEnabled="true" width="141px"/>
          </g:FlowPanel>
        </g:west>
        <g:center>
-         <g:FlowPanel styleName="{style.centerPanel}">
-         </g:FlowPanel>
+         <g:FlowPanel styleName="{style.centerPanel}"/>
        </g:center>
        <g:east size='7.5'>
          <g:FlowPanel styleName="{style.eastPanel}"/>

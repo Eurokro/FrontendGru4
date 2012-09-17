@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.Scanner;
 
-public class DB_REMOVE_ASAP111111 
+public class DB 
 {
 	private static Properties configFile;
 	private static File file;
@@ -20,11 +20,11 @@ public class DB_REMOVE_ASAP111111
 	/*
 	 * Constructors
 	 */
-	public DB_REMOVE_ASAP111111(){
+	public DB(){
 		this("Simulator.properties");
 	}
 	
-	public DB_REMOVE_ASAP111111(String filename){
+	public DB(String filename){
 		configFile = new Properties();
 		file = new File(filename);
 		
