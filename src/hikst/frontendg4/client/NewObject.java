@@ -11,6 +11,8 @@ import hikst.frontendg4.shared.SimulatorObject;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -31,6 +33,7 @@ public class NewObject extends Composite implements HasText {
 	ObjectMenu panel;
 	SimulatorObjectTree simulatorObject = new SimulatorObjectTree();
 	//SimulationManagementObject simManager = new SimulationManagementObject(this);
+	SimObject selectedSimObject = null;
 	
 	private static NewObjectUiBinder uiBinder = GWT
 			.create(NewObjectUiBinder.class);
@@ -56,6 +59,19 @@ public class NewObject extends Composite implements HasText {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
+	@UiHandler("impactFactor")
+	void onimpactFactorClick(ClickEvent event){
+		impactFactor.setText("1");
+		effect.setText("1");
+		volt.setText("1");
+		name.setText("1");
+		longtitude.setText("1");
+		latitude.setText("1");
+		usagePattern.setText("1");
+	}
+	
+	
+	
 	@Override
 	public String getText() {
 		// TODO Auto-generated method stub
@@ -122,7 +138,7 @@ public class NewObject extends Composite implements HasText {
 			else
 			{
 				
-				simulatorObject.rootObject.simulatorObjects.add(newObject);
+				selectedSimObject.simulatorObjects.add(newObject);
 			}
 			
 			simulatorObject.isEmpty = false;
@@ -134,6 +150,7 @@ public class NewObject extends Composite implements HasText {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void updateTree()
 	{
 		tree.clear();
@@ -141,12 +158,35 @@ public class NewObject extends Composite implements HasText {
 		CheckBox cb = new CheckBox(simulatorObject.rootObject.name);
 		TreeItem rootItem = new TreeItem(cb);
 	
-		rootItem.addItem("Effect: "+simulatorObject.rootObject.effect);
-		rootItem.addItem("Volt: "+simulatorObject.rootObject.volt);
-		rootItem.addItem("Longitude: "+simulatorObject.rootObject.longitude);
-		rootItem.addItem("Latitude: "+simulatorObject.rootObject.latitude);
-		rootItem.addItem("Usagepattern: "+simulatorObject.rootObject.usagePattern);
-		rootItem.addItem("Impact degree :"+simulatorObject.rootObject.impactDegree);
+//		rootItem.addItem("Effect: "+simulatorObject.rootObject.effect);
+//		rootItem.addItem("Volt: "+simulatorObject.rootObject.volt);
+//		rootItem.addItem("Longitude: "+simulatorObject.rootObject.longitude);
+//		rootItem.addItem("Latitude: "+simulatorObject.rootObject.latitude);
+//		rootItem.addItem("Usagepattern: "+simulatorObject.rootObject.usagePattern);
+//		rootItem.addItem("Impact degree :"+simulatorObject.rootObject.impactDegree);
+//		
+		tree.addSelectionHandler(new SelectionHandler<TreeItem>()
+				{
+
+					@Override
+					public void onSelection(SelectionEvent<TreeItem> event) {
+						
+						TreeItem treeItem = tree.getSelectedItem();
+						
+						Integer[] path = getPath(treeItem);
+						
+						SimObject selectedObject = simulatorObject.rootObject;
+						
+						for(int depth = path.length - 1; depth>= 0; depth--)
+						{
+							selectedObject = selectedObject.simulatorObjects.get(path[depth]);
+						}
+						
+						selectedSimObject = selectedObject;
+						
+					}
+			
+				});
 		
     	cb.setValue(true);
     	cb.addClickListener(new ClickListener()
@@ -157,6 +197,7 @@ public class NewObject extends Composite implements HasText {
 				
 				
 			}
+    		
     		
     	});
     	
@@ -175,19 +216,20 @@ public class NewObject extends Composite implements HasText {
     	
     	tree.addItem(rootItem);
     	
-    	initWidget(tree);
+    	//initWidget(tree);
 	}
 	
+	@SuppressWarnings("deprecation")
 	private TreeItem addChildren(SimObject simObject)
 	{
 		CheckBox cb = new CheckBox(simObject.name);
 		TreeItem rootItem = new TreeItem(cb);
-		rootItem.addItem("Effect: "+simObject.effect);
-		rootItem.addItem("Volt: "+simObject.volt);
-		rootItem.addItem("Longitude: "+simObject.longitude);
-		rootItem.addItem("Latitude: "+simObject.latitude);
-		rootItem.addItem("Usagepattern: "+simObject.usagePattern);
-		
+//		rootItem.addItem("Effect: "+simObject.effect);
+//		rootItem.addItem("Volt: "+simObject.volt);
+//		rootItem.addItem("Longitude: "+simObject.longitude);
+//		rootItem.addItem("Latitude: "+simObject.latitude);
+		//rootItem.addItem("Usagepattern: "+simObject.usagePattern);
+		//rootItem.addItem("Impact degree :"+simulatorObject.rootObject.impactDegree);
 		
     	cb.setValue(true);
     	cb.addClickListener(new ClickListener()
@@ -195,8 +237,8 @@ public class NewObject extends Composite implements HasText {
 
 			@Override
 			public void onClick(Widget sender) {
-				// TODO Auto-generated method stub
 				
+		
 			}
     		
     	});
@@ -214,11 +256,33 @@ public class NewObject extends Composite implements HasText {
     	return rootItem;
 	}
 	
+	private Integer[] getPath(TreeItem treeItem)
+	{
+		TreeItem parentItem = null;
+		ArrayList<Integer> path = new ArrayList<Integer>();
+		
+		while(treeItem.getParentItem() != null)
+		{
+			parentItem = treeItem.getParentItem();
+			
+			int index = parentItem.getChildIndex(treeItem);
+			
+			path.add(index);
+			
+			treeItem = parentItem;
+		}
+		
+		Integer[] returnPath = new Integer[path.size()];
+		path.toArray(returnPath);
+		Window.alert(path.toString());
+		return returnPath;
+	}
+	
 	private class SimulatorObjectTree
 	{
 		public boolean isEmpty = true;
 		public SimObject rootObject = new SimObject();
-		public SimObject currentSelectedObject = rootObject;
+		//public SimObject currentSelectedObject = rootObject;
 	}
 	
 	private class SimObject
